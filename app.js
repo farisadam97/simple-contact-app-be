@@ -8,6 +8,8 @@ dotenv.config();
 
 app.use(cors());
 
+require("./Database");
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
