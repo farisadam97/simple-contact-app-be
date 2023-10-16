@@ -22,36 +22,10 @@
 //   }
 // });
 
-const { Sequelize, Model, DataTypes } = require("sequelize");
-const client = new Sequelize({
+const { Sequelize } = require("sequelize");
+const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: "./contact.sqlite",
+  storage: "../contact.sqlite",
 });
 
-const Contact = client.define("contact", {
-  id: {
-    type: DataTypes.INTEGER,
-    autoIncrement: true,
-    primaryKey: true,
-  },
-  full_name: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  address: {
-    type: DataTypes.STRING(100),
-    allowNull: false,
-  },
-  phone_number: {
-    type: DataTypes.STRING(14),
-    allowNull: false,
-  },
-});
-
-const db = {};
-db.Sequelize = Sequelize;
-db.client = client;
-
-db.contact = Contact;
-
-module.exports = db;
+module.exports = sequelize;

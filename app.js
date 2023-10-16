@@ -8,10 +8,22 @@ dotenv.config();
 
 app.use(cors());
 
-const db = require("./Database");
-db.client.sync();
+const sequelize = require("./Database");
+const Contact = require("./Model/Contact");
+sequelize
+  .sync()
+  .then(() => {
+    console.log("Database synchronized");
+  })
+  .catch((error) => {
+    console.error("Error synchronizing the database:", error);
+  });
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+const route = require("./routes");
+
+app.use("/api", route);
 
 module.exports = app;
