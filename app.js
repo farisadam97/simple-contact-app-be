@@ -8,7 +8,8 @@ dotenv.config();
 
 app.use(cors());
 
-require("./Database");
+const db = require("./Database");
+db.client.sync();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
