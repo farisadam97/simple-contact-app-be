@@ -21,9 +21,9 @@ const Contact = sequelize.define(
       type: DataTypes.STRING(14),
       allowNull: false,
     },
-    //     image: {
-    //       type: DataTypes.BLOB("long"),
-    //     },
+    image: {
+      type: DataTypes.BLOB("long"),
+    },
   },
   {
     timestamps: true,

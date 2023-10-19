@@ -11,7 +11,7 @@ app.use(cors());
 const sequelize = require("./Database");
 const Contact = require("./Model/Contact");
 sequelize
-  .sync()
+  .sync({ alter: true })
   .then(() => {
     console.log("Database synchronized");
   })
