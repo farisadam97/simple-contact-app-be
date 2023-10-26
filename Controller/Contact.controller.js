@@ -4,17 +4,22 @@ const fs = require("fs");
 
 const getAllContacts = async (req, res) => {
   const contacts = await Contact.findAndCountAll();
-  successResponse(res, 200, "success", contacts);
+  const dataArr = {
+    total: contacts.count,
+    data: contacts.rows,
+  };
+  successResponse(res, 200, dataArr);
 };
 
 const addContact = async (req, res) => {
-  // const imageBuffer = Buffer.from(req.body.image, "base64");
+  const { fullName, address, phoneNumber, image } = req.body;
+
   try {
     const contact = {
-      full_name: req.body.fullName,
-      address: req.body.address,
-      phone_number: req.body.phoneNumber,
-      image: req.body.image,
+      full_name: fullName,
+      address: address,
+      phone_number: phoneNumber,
+      image: image,
     };
     const newContact = await Contact.create(contact);
     return res.status(200).json({
@@ -25,6 +30,11 @@ const addContact = async (req, res) => {
       message: error.message,
     });
   }
+};
+
+const updateContact = async (req, res) => {
+  const { id, fullName, address, phoneNumber, image } = req.body;
+  const contact = await Contact.findByPk();
 };
 
 const deleteContact = async (req, res) => {

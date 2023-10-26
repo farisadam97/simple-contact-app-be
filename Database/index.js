@@ -25,7 +25,6 @@
 const { Sequelize } = require("sequelize");
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: "../contact2.sqlite",
 });
 
 module.exports = sequelize;
