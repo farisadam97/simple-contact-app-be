@@ -8,7 +8,7 @@ const getAllContacts = async (req, res) => {
     total: contacts.count,
     data: contacts.rows,
   };
-  successResponse(res, 200, dataArr);
+  successResponse(res, 200, "All contacts fetched", dataArr);
 };
 
 const addContact = async (req, res) => {

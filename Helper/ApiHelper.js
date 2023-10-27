@@ -1,6 +1,7 @@
-const successResponse = async (res, status, data) => {
+const successResponse = async (res, status, message, data) => {
   return res.status(status).json({
     status: "success",
+    message,
     data: data,
   });
 };
