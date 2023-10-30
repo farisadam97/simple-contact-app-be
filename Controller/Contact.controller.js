@@ -2,8 +2,22 @@ const Contact = require("../Model/Contact");
 const { successResponse, errorResponse } = require("../Helper/ApiHelper");
 const fs = require("fs");
 
+const blobToBase64 = (blob) => {
+  var reader = new FileReader();
+  reader.readAsDataURL(blob);
+  reader.onloadend = function () {
+    var base64data = reader.result;
+    return base64data;
+  };
+};
+
 const getAllContacts = async (req, res) => {
   const contacts = await Contact.findAndCountAll();
+
+  contacts.rows.map((contact) => {
+    contact.image = contact.image.toString("base64");
+    return contact;
+  });
   const dataArr = {
     total: contacts.count,
     data: contacts.rows,
@@ -19,7 +33,7 @@ const addContact = async (req, res) => {
       full_name: fullName,
       address: address,
       phone_number: phoneNumber,
-      image: image,
+      image: Buffer.from(image, "base64"),
     };
     const newContact = await Contact.create(contact);
     return res.status(200).json({
