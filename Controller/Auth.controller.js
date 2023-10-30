@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { successResponse, errorResponse } = require("../Helper/ApiHelper");
-
+const { jwtSecret } = require("../Config");
 const loginAccount = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -12,7 +12,7 @@ const loginAccount = async (req, res) => {
       {
         username: username,
       },
-      "seCreT2Key2",
+      jwtSecret,
       {
         expiresIn: "15min",
       }

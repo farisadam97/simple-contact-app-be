@@ -7,13 +7,14 @@
 var app = require("../app");
 var debug = require("debug")("simple-contact-app-be:server");
 var http = require("http");
+const { port } = require("../Config");
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || "3001");
-app.set("port", port);
+var portServer = normalizePort(port || "3001");
+app.set("port", portServer);
 
 /**
  * Create HTTP server.
