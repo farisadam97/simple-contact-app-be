@@ -9,7 +9,7 @@ const errorResponse = async (res, statusCode, message) => {
   const splitMessage = message.replace(/\"/g, "").split(",");
   return res.status(statusCode).json({
     status: "error",
-    splitMessage,
+    message: splitMessage[0],
   });
 };
 

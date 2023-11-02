@@ -4,8 +4,8 @@ const { jwtSecret } = require("../Config");
 const loginAccount = async (req, res) => {
   const { username, password } = req.body;
   try {
-    if (username !== "admin" && password !== "password") {
-      successResponse(res, 400, "Username/password doesn't match!");
+    if (username !== "admin" || password !== "password") {
+      throw new Error("Username or password does not match");
     }
 
     const token = jwt.sign(
@@ -14,7 +14,7 @@ const loginAccount = async (req, res) => {
       },
       jwtSecret,
       {
-        expiresIn: "15min",
+        expiresIn: "12h",
       }
     );
     successResponse(res, 200, "Login success", {
@@ -22,7 +22,7 @@ const loginAccount = async (req, res) => {
       token: token,
     });
   } catch (error) {
-    errorResponse(res, 400, error.message);
+    errorResponse(res, 401, error.message);
   }
 };
 module.exports = {
